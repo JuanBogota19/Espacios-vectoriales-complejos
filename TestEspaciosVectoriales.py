@@ -96,6 +96,25 @@ class TestCplxOperations(unittest.TestCase):
         resultado_real = ev.distancia_vector(vector1, vector2)
         self.assertTrue(np.array_equal(resultado_real, resultado_esperado))
 
+    def testmatriz_unitaria(self):
+        matriz = np.array([[1, 0], [0, 1]])
+        resultado_esperado = True
+        resultado_real = ev.matriz_unitaria(matriz)
+        self.assertTrue(np.array_equal(resultado_real, resultado_esperado))
+
+    def testmatriz_hermitania(self):
+        matriz = np.array([[1, 2 + 3j], [2 - 3j, 4]])
+        resultado_esperado = True
+        resultado_real = ev.matriz_hermitania(matriz)
+        self.assertTrue(np.array_equal(resultado_real, resultado_esperado))
+
+    def testproduct_tensor(self):
+        matriz1 = np.array([[1, 2], [3, 4]])
+        matriz2 = np.array([[0, 5], [6, 7]])
+        resultado_esperado = ([[0, 5, 0, 10], [6, 7, 12, 14], [0, 15, 0, 20], [18, 21, 24, 28]])
+        resultado_real = ev.product_tensor(matriz1, matriz2)
+        self.assertTrue(np.array_equal(resultado_real, resultado_esperado))
+
 
 if __name__ == '__main__':
     unittest.main()

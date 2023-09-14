@@ -143,6 +143,7 @@ resultado = inter_vect(vector1, vector2)
 print("12", resultado)
 
 def norma_vector(vector):
+    'Funcion de la Norma de un vector'
     cuadrado = np.square(vector)
     suma = np.sum(cuadrado)
     norma = suma**0.5
@@ -153,6 +154,7 @@ resultado = norma_vector(vector)
 print("13", resultado)
 
 def distancia_vector(vector1, vector2):
+    'Funcion de la Distancia entre dos vectores'
     vector = vector1 - vector2
     distancia = norma_vector(vector)
     return distancia
@@ -162,11 +164,49 @@ vector2 = np.array([3, 4], dtype=complex)
 resultado = distancia_vector(vector1, vector2)
 print("14", resultado)
 
-#def propio_matriz
+def matriz_unitaria(matriz):
+    'Funcion para Revisar si una matriz es unitaria'
+    if matriz.shape[0] != matriz.shape[1]:
+        return False
 
+    adjunta = adj_matrix(matriz)
+    producto = prodc_matrix(matriz, adjunta)
+    identidad = np.eye(matriz.shape[0])
 
+    return np.allclose(producto, identidad)
 
+matriz = np.array([[1, 0], [0, 1]])
+resultado = matriz_unitaria(matriz)
+print("15", resultado)
 
+def matriz_hermitania(matriz):
+    'Funcion para Revisar si una matriz es Hermitiana'
+    if matriz.shape[0] != matriz.shape[1]:
+        return False
+
+    adjunta = adj_matrix(matriz)
+    return np.allclose(matriz, adjunta)
+
+matriz = np.array([[1, 2 + 3j], [2 - 3j, 4]])
+resultado = matriz_hermitania(matriz)
+print("16", resultado)
+
+def product_tensor(matriz1, matriz2):
+    'Funcion para el Producto tensor de dos matrices/vectores'
+    m, n = matriz1.shape
+    p, q = matriz2.shape
+    resultado = np.zeros((m * p, n * q))
+
+    for j in range(m):
+        for k in range(n):
+            resultado[j*p:(j+1)*p, k*q:(k+1)*q] = matriz1[j, k] * matriz2
+
+    return resultado
+
+matriz1 = np.array([[1, 2], [3, 4]])
+matriz2 = np.array([[0, 5], [6, 7]])
+resultado = product_tensor(matriz1, matriz2)
+print("17", resultado)
 
 
 
